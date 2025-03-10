@@ -6,10 +6,10 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     if @student.save
-      session[:student_id] = @student.id
-      redirect_to courses_path, notice: "Signed up successfully!"
+      session[:student_id] = @student.id  
+      redirect_to courses_path, notice: "Signup successful!"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
