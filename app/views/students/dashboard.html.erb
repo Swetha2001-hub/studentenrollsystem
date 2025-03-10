@@ -1,0 +1,22 @@
+<h1>Welcome, <%= @student.name %>!</h1>
+
+<h2>Your Enrolled Courses:</h2>
+<% if @enrolled_courses.any? %>
+  <ul>
+    <% @enrolled_courses.each do |course| %>
+      <li>
+        <strong><%= course.name %></strong> - <%= course.description %>
+        <% enrollment = Enrollment.find_by(student_id: @student.id, course_id: course.id) %>
+<% if enrollment %>
+  <%= button_to "Unenroll", enrollment_path(enrollment), method: :delete, data: { confirm: "Are you sure you want to unenroll?" } %>
+<% end %>
+
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have not enrolled in any courses yet.</p>
+  <%= link_to "Browse Courses", courses_path %>
+<% end %>
+
+

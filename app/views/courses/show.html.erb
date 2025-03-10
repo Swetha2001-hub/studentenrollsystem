@@ -1,0 +1,7 @@
+<h1><%= @course.name %></h1>
+<p><strong>Description:</strong> <%= @course.description %></p>
+<p><strong>Duration:</strong> <%= @course.duration %></p>
+<p><strong>Instructor:</strong> <%= @course.instructor %></p>
+<p><strong>Price:</strong> $<%= @course.price %></p>
+
+<%= link_to "Back to Courses", courses_path %>

@@ -1,0 +1,10 @@
+<h1>New Course</h1>
+
+<%= form_with model: @course do |form| %>
+  <%= form.label :name %> <%= form.text_field :name %>
+  <%= form.label :description %> <%= form.text_area :description %>
+  <%= form.label :duration, "Duration (e.g., 6 weeks)" %> <%= form.text_field :duration %>
+  <%= form.label :instructor, "Instructor Name" %> <%= form.text_field :instructor %>
+  <%= form.label :price, "Course Price ($)" %> <%= form.number_field :price, step: 0.01 %>
+  <%= form.submit "Save Course" %>
+<% end %>

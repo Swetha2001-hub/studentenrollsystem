@@ -1,0 +1,17 @@
+<h1>Available Courses</h1>
+
+<% if @courses.any? %>
+  <% @courses.each do |course| %>
+    <p>
+      <strong><%= course.name %></strong> - <%= course.description %>
+      
+      <% if Enrollment.find_by(student_id: session[:student_id], course_id: course.id).nil? %>
+        <%= button_to "Enroll", enrollments_path, method: :post, params: { course_id: course.id }, data: { confirm: "Are you sure?" } %>
+      <% else %>
+        <span style="color: green;">Already Enrolled</span>
+      <% end %>
+    </p>
+  <% end %>
+<% else %>
+  <p>No courses available.</p>
+<% end %>
