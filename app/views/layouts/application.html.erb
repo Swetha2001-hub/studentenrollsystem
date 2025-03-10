@@ -24,17 +24,32 @@
 
   <body>
   <nav>
-  <% if session[:student_id] %>
-    <%= link_to "Dashboard", student_dashboard_path %> |
-    <%= link_to "Courses", courses_path %> |
-    <%= link_to "Enrolled Courses", enrolled_courses_path %> |
-    <%= button_to "Logout", logout_path, method: :delete %>
-  <% else %>
-    <%= link_to "Login", login_path %>
-    <%= link_to "Sign Up", signup_path %>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="<%= root_path %>">Course Enrollment</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <% if session[:student_id] %>
+          <li class="nav-item"><%= link_to "Courses", courses_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger" %>
 
-  <% end %>
+        <% else %>
+          <li class="nav-item"><%= link_to "Login", login_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Sign Up", signup_path, class: "nav-link btn btn-primary" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </nav>
+
+</nav>
+<% if flash[:notice] %>
+  <div class="alert alert-success text-center"><%= flash[:notice] %></div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="alert alert-danger text-center"><%= flash[:alert] %></div>
+<% end %>
 
     <%= yield %>
   </body>

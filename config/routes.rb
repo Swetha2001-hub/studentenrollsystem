@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :students, only: [:new, :create]
   resources :courses, only: [:index, :show]
   resources :enrollments, only: [:create, :destroy]
-  
+  resources :sessions, only: [:new, :create, :destroy]
   get "/login", to: "students#login"
   post "/login", to: "students#authenticate"
   delete "/logout", to: "students#logout"
@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   post "students", to: "students#create"
   get "/dashboard", to: "students#dashboard", as: "student_dashboard"
   get "/enrolled_courses", to: "students#enrolled_courses", as: "enrolled_courses"
-  
+  resources :courses do
+    post "enroll", to: "enrollments#create", as: "enroll"
+  end
 end
